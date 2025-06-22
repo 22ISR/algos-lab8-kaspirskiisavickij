@@ -9,17 +9,21 @@ monthly_spending = [2689.56, 2770.38, 2394.04, 2099.91, 3182.20, 3267.12, 1746.8
 ---
 """
 monthly_spending = [2689.56, 2770.38, 2394.04, 2099.91, 3182.20, 3267.12, 1746.83, 2545.72, 3328.20, 3147.30, 2462.61, 3890.45]
-first_semester_sum = 0
-for i in range(6):
-    first_semester_sum += monthly_spending[i]
-first_semester_average = first_semester_sum / 6
-second_semester_sum = 0
-for i in range(6, 12):
-    second_semester_sum += monthly_spending[i]
-second_semester_average = second_semester_sum / 6
 
-print(f"Средние расходы за первый семестр: {first_semester_average:.2f}")
-print(f"Средние расходы за второй семестр: {second_semester_average:.2f}")
+sum_first = 0
+for i in range(6):
+    sum_first += monthly_spending[i]
+
+sum_second = 0
+for i in range(6, 12):
+    sum_second += monthly_spending[i]
+
+average_first = sum_first / 6
+average_second = sum_second / 6
+
+print("Средние расходы за первый семестр:", round(average_first, 2))
+print("Средние расходы за второй семестр:", round(average_second, 2))
+
 
 """
 ### Задача 2: Кто тратил больше?  
@@ -31,13 +35,15 @@ sam_monthly_spending = [1969.62, 3939.37, 2241.59, 3968.27, 3068.80, 1755.02, 38
 Напишите программу, которая сравнивает расходы Джона и Сэма по месяцам и подсчитывает количество месяцев, в которых Джон тратил больше.  
 
 """
-john_monthly_spending = [2689.56, 2770.38, 2394.04, 2099.91, 3182.20, 3267.12, 1746.83, 2545.72, 3328.20, 3147.30, 2462.61, 3890.45]
-sam_monthly_spending = [1969.62, 3939.37, 2241.59, 3968.27, 3068.80, 1755.02, 3885.66, 2491.67, 3828.49, 3171.32, 2771.32, 3380.37]
-months_john_spent_more = 0
+john = [2689.56, 2770.38, 2394.04, 2099.91, 3182.20, 3267.12, 1746.83, 2545.72, 3328.20, 3147.30, 2462.61, 3890.45]
+sam = [1969.62, 3939.37, 2241.59, 3968.27, 3068.80, 1755.02, 3885.66, 2491.67, 3828.49, 3171.32, 2771.32, 3380.37]
+
+count = 0
 for i in range(12):
-    if john_monthly_spending[i] > sam_monthly_spending[i]:
-        months_john_spent_more +=1
-print(f'В связи с вот этими вот получилось вот столько вот месяцев:{months_john_spent_more}')
+    if john[i] > sam[i]:
+        count += 1
+
+print(count)
 
 
 """
@@ -55,9 +61,9 @@ tina_friends = ["Tim", "Susan", "Mary", "Josh"]
 paul_friends = ["Mary", "Tim", "Mike", "Henry"]  
 tina_friends = ["Tim", "Susan", "Mary", "Josh"]
 
-all_friends = list(set(paul_friends + tina_friends))
+Common_friends = list(set(paul_friends + tina_friends))
 
-print(all_friends)
+print(Common_friends)
 
 """
 ---
@@ -108,15 +114,15 @@ poll_results = ["Python", "Java", "Javascript", "Python", "Javascript", "Python"
 Используя словарь, подсчитайте количество голосов за каждый язык.  
 """
 poll_results = ["Python", "Java", "Javascript", "Python", "Javascript", "Python", "C", "Python", "Python", "C", "Javascript"]
-all_golos = {}
+votes_count = {}
+
 for language in poll_results:
-     if language in all_golos:
-         all_golos[language] += 1
-     else:
-         all_golos[language] = 1
-print("Результаты голосования:")
-for language, count in all_golos.items():
-     print(f"{language}: {count} голосов")
+    if language in votes_count:
+        votes_count[language] += 1
+    else:
+        votes_count[language] = 1
+
+print(votes_count)
 
 
 """
@@ -138,7 +144,7 @@ for player, score in scores:
         total_scores[player] += score
     else:
         total_scores[player] = score
-print("Суммарные очки игроков:")
+print("Суммарные очки:")
 for player, score in total_scores.items():
      print(f"{player}: {score} очков")
 
@@ -154,7 +160,7 @@ numbers = [10, 3, 5, 9, 18, 3, 0, 7]
 Напишите функцию, которая возвращает максимальное значение, сумму и среднее арифметическое чисел в списке.  
 """
 numbers = [10, 3, 5, 9, 18, 3, 0, 7]
-def calculate_statistics(numbers):
+def list_statistics(numbers):
     if not numbers:
         return None, None, None
     max_value = max(numbers)
@@ -162,7 +168,7 @@ def calculate_statistics(numbers):
     average = total_sum / len(numbers)
     return max_value, total_sum, average
 numbers = [10, 3, 5, 9, 18, 3, 0, 7]
-max_val, total_sum, avg = calculate_statistics(numbers)
+max_val, total_sum, avg = list_statistics(numbers)
 print(f"Максимальное значение: {max_val}")
 print(f"Сумма чисел: {total_sum}")
 print(f"Среднее арифметическое: {avg}")
@@ -177,16 +183,14 @@ word_list = ["apple", "airplane", "carrot", "elephant", "guitar", "moonlight"]
 ```  
 Напишите программу, которая определяет самое длинное и самое короткое слово в списке.  
 """
-def find_longest_and_shortest_words(word_list):
-    if not word_list:
-        return None, None
-    longest_word = max(word_list, key=len)
-    shortest_word = min(word_list, key=len)
-    return longest_word, shortest_word
 word_list = ["apple", "airplane", "carrot", "elephant", "guitar", "moonlight"]
-longest, shortest = find_longest_and_shortest_words(word_list)
-print(f"Самое длинное слово: {longest}")
-print(f"Самое короткое слово: {shortest}")
+
+longest_word = max(word_list, key=len)
+
+shortest_word = min(word_list, key=len)
+
+print("Самое длинное слово:", longest_word)
+print("Самое короткое слово:", shortest_word)
 """
 ---
 
@@ -198,14 +202,13 @@ number_list = [5, 8, 2, 7, 3, 5, 6, 9, 2, 4, 8, 7, 1, 5, 3]
 Создайте новый список, содержащий только числа, которые встречаются в оригинальном списке не менее трёх раз.  
 """
 number_list = [5, 8, 2, 7, 3, 5, 6, 9, 2, 4, 8, 7, 1, 5, 3]
-frequency_dict = {}
+result = []
+
 for num in number_list:
-    if num in frequency_dict:
-        frequency_dict[num] += 1
-    else:
-        frequency_dict[num] = 1
-new_list = [num for num, freq in frequency_dict.items() if freq >= 3]
-print(new_list)
+    if number_list.count(num) >= 3 and num not in result:
+        result.append(num)
+
+print(result)
 """
 ---
 
@@ -216,18 +219,17 @@ exam_results = [23, 78, 96, 32, 53, 67, 23, 98, 33, 38, 45, 39, 86, 12, 43, 45]
 ```  
 Напишите программу, которая определяет второй по величине результат в списке.  
 """
-exam_results = [23, 78, 96, 32, 53, 67, 23, 98, 33, 38, 45, 39, 86, 12, 43, 45]  
-def find_second_largest(exam_results):
-    unique_results = sorted(set(exam_results), reverse=True)
-    if len(unique_results) < 2:
-        return None
-    return unique_results[1]
 exam_results = [23, 78, 96, 32, 53, 67, 23, 98, 33, 38, 45, 39, 86, 12, 43, 45]
-second_largest = find_second_largest(exam_results)
-if second_largest is not None:
-    print(f"Второй по величине результат: {second_largest}")
-else:
-    print("В списке менее двух уникальных результатов.")
+
+max_result = max(exam_results) 
+second_max = 0 
+
+for score in exam_results:
+    if score != max_result and score > second_max:
+        second_max = score
+
+print("Второй по величине результат:", second_max)
+
 """
 --- 
 """
